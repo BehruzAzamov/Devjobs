@@ -31,8 +31,15 @@ export default function Home() {
 
     try {
       setIsLoading(true);
-      const { data } = await api.get(`/jobs?${filtersQuery}`);
-      setData(data);
+      const jobsResponse = await fetch('/data.json');
+      const { jobs } = await jobsResponse.json();
+      const filteredJobs = jobs.filter((job) => {
+        const titleMatch = job.position.toLowerCase().includes(filters.title.toLowerCase());
+        const locationMatch = job.location.toLowerCase().includes(filters.location.toLowerCase());
+        const fullTimeMatch = filters.forceFullTime ? job.contract === 'Full Time' : true;
+        return titleMatch && locationMatch && fullTimeMatch;
+      });
+      setData({ items: filteredJobs, length: filteredJobs.length });
       setError(null);
     } catch (err) {
       setError(err.message);
