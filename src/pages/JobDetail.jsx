@@ -46,7 +46,7 @@ export default function JobDetail() {
                 <span>{data.contract}</span>
               </div>
               <h1 className="mt-2 font-bold text-h3 md:text-h1">{data.position}</h1>
-              <div className="mt-2 text-h4 text-primary font-bold ">{data.location}</div>
+              <div className="mt-2 text-h4 text-primary font-bold">{data.location}</div>
             </div>
             <div className="mt-[3.125rem] flex flex-col text-center md:mt-0 md:self-center">
               <Button href={data.apply} target="_blank">
